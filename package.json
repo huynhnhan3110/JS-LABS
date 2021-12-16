@@ -4,7 +4,7 @@
   "description": "",
   "main": "09-26-main.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "jest --coverage"
   },
   "keywords": [
     "Javascript"

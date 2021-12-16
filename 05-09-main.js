@@ -5,9 +5,9 @@
 // mark < 4 ---> 'Bad'
 
 // v1 ky thuat linh canh
-function classifyStudent(mark) {
+export function classifyStudentV1(mark) {
+  if (mark > 10 || mark < 0) return 'Invalid mark!';
   let result;
-
   if (mark > 8) result = 'Excellence';
   else if (mark >= 7) result = 'Good';
   else if (mark >= 4) result = 'Not good';
@@ -15,13 +15,9 @@ function classifyStudent(mark) {
 
   return result;
 }
-console.log(classifyStudent(10));
-console.log(classifyStudent(8));
-console.log(classifyStudent(5));
-console.log(classifyStudent(1));
 
 // v2 gan gia tri dau tien cho linh canh
-function classifyStudent(mark) {
+export function classifyStudentV2(mark) {
   if (mark > 10 || mark < 0) return 'Invalid mark!';
 
   let result = 'Bad';
@@ -31,14 +27,8 @@ function classifyStudent(mark) {
 
   return result;
 }
-console.log(classifyStudent(14));
-console.log(classifyStudent(10));
-console.log(classifyStudent(8));
-console.log(classifyStudent(5));
-console.log(classifyStudent(1));
-
 // V3 if - return
-function classifyStudent(mark) {
+export function classifyStudentV3(mark) {
   if (mark > 10 || mark < 0) return 'Invalid mark!';
 
   if (mark > 8) return 'Excellence';
@@ -47,8 +37,6 @@ function classifyStudent(mark) {
 
   return 'Bad';
 }
-console.log(classifyStudent(14));
-console.log(classifyStudent(10));
-console.log(classifyStudent(8));
-console.log(classifyStudent(5));
-console.log(classifyStudent(1));
+console.log(classifyStudentV1(14));
+console.log(classifyStudentV2(10));
+console.log(classifyStudentV3(1));
