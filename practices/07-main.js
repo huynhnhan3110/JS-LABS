@@ -32,10 +32,12 @@
 // }
 // using reduce
 export function countUniqueNumber(numberList) {
-    if(!Array.isArray(numberList) || numberList.length === 0) return 0;
+  if (!Array.isArray(numberList) || numberList.length === 0) return 0;
 
-    return Object.keys(numberList.reduce((count, num) => {
-        count[num] = true;
-        return count;
-    },{})).length;
+  return Object.keys(
+    numberList.reduce((count, num) => {
+      count[num] = true;
+      return count;
+    }, {})
+  ).length;
 }
