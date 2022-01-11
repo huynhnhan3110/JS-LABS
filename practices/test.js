@@ -1,15 +1,27 @@
 // 'you are nice' => 'nice are you'
 // 'you are nice' => 'ecin era..' => 'ecin => nice
-function test(str) {
-  let lengthStr = str.length;
-  let s = '';
+function test(input) {
+  const arrAfterSplit = splitString(input, ' ');
 
-  while (str.indexOf(' ') !== -1) {
-    const index = str.lastIndexOf(' ');
-    let strAfter = str.substring(index + 1, lengthStr);
-    str = str.substring(0, index + 1);
+  let reverseArr = [];
+  for (let i = arrAfterSplit.length - 1; i >= 0; i--) {
+    reverseArr.push(arrAfterSplit[i]);
   }
-  return s;
+
+  return reverseArr.join(' ');
 }
-console.log(test('you are nice'));
-console.log(test('how       are   you'));
+function splitString(input, delimeter) {
+  let arr = [''];
+  let j = 0;
+  for (let i = 0; i < input.length; i++) {
+    if (input[i] === delimeter) {
+      arr.push('');
+      j++;
+    } else {
+      arr[j] += input[i];
+    }
+  }
+  return arr;
+}
+console.log(test('you are     nice')); // --> nice are you
+console.log(test('how          are   you')); // --> you   are      how
