@@ -1,4 +1,4 @@
-function createLinkedList() {
+export function createLinkedList() {
   let head = null;
   function getSize() {
     if (head == null) return -1;
@@ -10,67 +10,80 @@ function createLinkedList() {
     }
     return count;
   }
-  //   function insertTail(data) {
-  //     const newNode = {
-  //       data: data,
-  //       next: null,
-  //     };
-  //     if (head == null) {
-  //       head = newNode;
-  //       return;
-  //     }
-
-  //     let tail = head;
-  //     while (tail.next != null) {
-  //       tail = tail.next;
-  //     }
-
-  //     tail.next = newNode;
-  //     newNode.next = null;
-  //   }
-
-  function insertBeforePosition(data, position) {
+  function insertHead(data) {
     const newNode = {
       data: data,
       next: null,
     };
     if (head == null) {
       head = newNode;
+      return;
     }
-    if (position <= 0) {
+    newNode.next = head;
+    head = newNode;
+  }
+  function insertTail(data) {
+    const newNode = {
+      data: data,
+      next: null,
+    };
+    if (head == null) {
       head = newNode;
-      return head;
-    }
-    if (position >= getSize()) {
-      let tail = head;
-      while (tail.next != null) {
-        tail = tail.next;
-      }
-
-      tail.next = newNode;
-      newNode.next = null;
-      return head;
+      return;
     }
 
-    if (position > 0 && position < getSize()) {
-      let current = head;
-      let indx = 1;
-      while (current.next != null) {
-        let pre = current.next;
-
-        if (indx === position) {
-          newNode.next = pre;
-          current.next = newNode;
-        }
-        current = current.next;
-        indx++;
-      }
-      return head;
+    let tail = head;
+    while (tail.next != null) {
+      tail = tail.next;
     }
 
-    return head;
+    tail.next = newNode;
   }
 
+  function insertBeforePosition(data, position) {
+    const newNode = {
+      data: data,
+      next: null,
+    };
+    if (position <= 0 || head == null) {
+      insertHead(data);
+      return head;
+    }
+
+    let prev = head;
+    let curr = head;
+    let i = 0;
+
+    while (curr != null && i < position) {
+      prev = curr;
+      curr = curr.next;
+      i++;
+    }
+
+    newNode.next = curr;
+    prev.next = newNode;
+    return head;
+  }
+  function some(isValidFn) {
+    if (head == null) return false;
+    let current = head;
+    while (current != null) {
+      if (isValidFn(current.data)) return true;
+      current = current.next;
+    }
+    return false;
+  }
+  function every(isValidFn) {
+    if (head == null) return false;
+    let current = head;
+    while (current != null) {
+      if (!isValidFn(current.data)) {
+        return false;
+      }
+      current = current.next;
+    }
+    return true;
+  }
   function printList() {
     if (head == null) return;
 
@@ -82,8 +95,5 @@ function createLinkedList() {
     }
   }
 
-  return { getSize, insertBeforePosition, printList };
+  return { getSize, insertBeforePosition, printList, insertTail, some, every };
 }
-const newList = createLinkedList();
-newList.insertBeforePosition(110, 1);
-newList.printList();
